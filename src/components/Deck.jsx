@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect, useContext } from "react"
 import { Context, updateData, updateState } from "../store"
 import { Link } from "react-router-dom"
+import Confirm from "./Confirm"
 
 const Deck = () => {
-  const [{ data, language, state }, dispatch] = useContext(Context)
+  const [{ data, language, audio, state }, dispatch] = useContext(Context)
   const [index, setIndex] = useState()
+  const [isConfirm, setConfirm] = useState(false)
   const card = useRef()
 
   useEffect(() => {
@@ -16,8 +18,14 @@ const Deck = () => {
     setIndex(state.deck.index)
   }, [state])
 
+  useEffect(() => {
+    if (audio === "autoplay") {
+      playAudio()
+    }
+  }, [index])
+
   const playAudio = (event) => {
-    event.stopPropagation()
+    event?.stopPropagation()
     const audio = new Audio(data[index]?.audio)
     audio.play()
   }
@@ -39,6 +47,7 @@ const Deck = () => {
   }
 
   const restart = () => {
+    setConfirm(false)
     if (card.current.classList.contains("flip")) {
       card.current.classList.remove("flip")
       setTimeout(() => {
@@ -52,14 +61,15 @@ const Deck = () => {
   }
 
   return (
-    <div className="shape relative flex w-1/3 flex-col items-center justify-center rounded-lg bg-white/90 p-8 text-center shadow-2xl transition duration-300 ease-in-out dark:bg-slate-900/90">
+    <div className="shape relative flex w-1/2 flex-col items-center justify-center rounded-lg bg-white/90 p-8 text-center shadow-2xl transition duration-300 ease-in-out dark:bg-slate-900/90">
+      {isConfirm ? <Confirm resolve={restart} reject={() => setConfirm(false)} isShuffle={true} /> : ""}
       <Link to="/yamemorize/option/scan">
         <div className="absolute top-2 left-2 cursor-pointer text-2xl text-blue-200 transition-all hover:text-blue-50">
           <ion-icon name="arrow-back-circle"></ion-icon>
         </div>
       </Link>
       <div
-        onClick={restart}
+        onClick={() => setConfirm(true)}
         className="absolute top-2 right-2 cursor-pointer text-2xl text-blue-200 transition-all hover:text-blue-50"
       >
         <ion-icon name="reload-circle"></ion-icon>

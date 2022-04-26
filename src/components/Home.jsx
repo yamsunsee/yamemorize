@@ -141,7 +141,7 @@ const Home = () => {
           onClick={fetchData}
           className="mt-4 w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700"
         >
-          {language === "english" ? "Generate" : "Bắt đầu"}
+          {language === "english" ? "Begin session" : "Bắt đầu"}
         </button>
         <div className="flex w-full justify-evenly">
           <a className="mt-4 text-blue-500 underline" href={DEFAULT_DATASHEET_LINK} target="_blank">

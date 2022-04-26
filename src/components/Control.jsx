@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react"
-import { Context, changeLanguage } from "../store"
+import { Context, changeLanguage, changeAudio } from "../store"
 
 const Control = () => {
-  const [{ language }, dispatch] = useContext(Context)
+  const [{ language, audio }, dispatch] = useContext(Context)
   const [theme, setTheme] = useState("")
 
   useEffect(() => {
@@ -17,6 +17,9 @@ const Control = () => {
 
     const localLanguage = JSON.parse(localStorage.getItem("y-language")) || "english"
     dispatch(changeLanguage(localLanguage))
+
+    const localAudio = JSON.parse(localStorage.getItem("y-audio")) || "autoplay"
+    dispatch(changeAudio(localAudio))
   }, [])
 
   const toggleMode = () => {
@@ -37,6 +40,12 @@ const Control = () => {
     localStorage.setItem("y-language", JSON.stringify(newLanguage))
   }
 
+  const toggleAutoPlayAudio = () => {
+    const newAudio = audio === "autoplay" ? "muted" : "autoplay"
+    dispatch(changeAudio(newAudio))
+    localStorage.setItem("y-audio", JSON.stringify(newAudio))
+  }
+
   return (
     <div className="control group absolute bottom-2 right-2 flex h-12 w-12 cursor-pointer items-center justify-center rounded-lg bg-white/10 text-2xl text-blue-300 transition-all hover:text-blue-400 dark:bg-slate-900/90">
       <ion-icon name="settings"></ion-icon>
@@ -45,6 +54,12 @@ const Control = () => {
         className="absolute bottom-0 right-0 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-sm font-bold uppercase opacity-0 transition-all hover:bg-blue-400 hover:text-white group-hover:bottom-[120%] group-hover:opacity-100 dark:bg-slate-900/90 dark:hover:text-blue-200"
       >
         {language === "english" ? "vie" : "eng"}
+      </div>
+      <div
+        onClick={toggleAutoPlayAudio}
+        className="absolute bottom-0 right-0 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl font-bold uppercase opacity-0 transition-all hover:bg-blue-400 hover:text-white group-hover:right-[120%] group-hover:bottom-[120%] group-hover:opacity-100 dark:bg-slate-900/90 dark:hover:text-blue-200"
+      >
+        {audio === "autoplay" ? <ion-icon name="volume-mute"></ion-icon> : <ion-icon name="volume-high"></ion-icon>}
       </div>
       <div
         onClick={toggleMode}

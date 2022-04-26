@@ -1,7 +1,12 @@
-import { TOGGLE_LANGUAGE, UPDATE_DATA, UPDATE_STATE, UPDATE_LINK } from "./Constants"
+import { TOGGLE_LANGUAGE, TOGGLE_AUDIO, UPDATE_DATA, UPDATE_STATE, UPDATE_LINK } from "./Constants"
 
 export const changeLanguage = (payload) => ({
   type: TOGGLE_LANGUAGE,
+  payload,
+})
+
+export const changeAudio = (payload) => ({
+  type: TOGGLE_AUDIO,
   payload,
 })
 

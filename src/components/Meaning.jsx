@@ -2,12 +2,14 @@ import { useRef, useState, useEffect, useContext } from "react"
 import { Context, updateData, updateState } from "../store"
 import { Link } from "react-router-dom"
 import Result from "./Result"
+import Confirm from "./Confirm"
 
 const Meaning = () => {
-  const [{ data, language, state }, dispatch] = useContext(Context)
+  const [{ data, language, audio, state }, dispatch] = useContext(Context)
   const [index, setIndex] = useState(0)
   const [score, setScore] = useState(0)
   const [isAnswer, setAnswer] = useState(false)
+  const [isConfirm, setConfirm] = useState(false)
   const [randomAnswers, setRandomAnswers] = useState([])
   const word = useRef()
   const answers = useRef([])
@@ -40,6 +42,13 @@ const Meaning = () => {
     }
   })
 
+  const playAudio = () => {
+    if (audio === "autoplay") {
+      const audio = new Audio(data[index]?.audio)
+      audio.play()
+    }
+  }
+
   const handleClick = (event) => {
     if (event.target.classList.contains("before-select")) {
       dispatch(updateState(answers.current.indexOf(event.target), "meaning", "select"))
@@ -64,6 +73,7 @@ const Meaning = () => {
         const newScore = state.meaning.select !== -1 ? score : score <= 1 ? 0 : score - 1
         dispatch(updateState(newScore, "meaning", "score"))
       }
+      playAudio()
     }
 
     setAnswer(true)
@@ -112,6 +122,7 @@ const Meaning = () => {
   const restart = () => {
     setIndex(0)
     setScore(0)
+    setConfirm(false)
     const shuffledData = [...data].sort(() => Math.random() - 0.5)
     dispatch(updateData(shuffledData))
     localStorage.setItem("y-data", JSON.stringify(shuffledData))
@@ -121,8 +132,13 @@ const Meaning = () => {
     dispatch(updateState([], "meaning", "answers"))
   }
 
+  const handleReset = () => {
+    setConfirm(true)
+  }
+
   return (
     <div className="shape-small relative flex min-h-full w-1/2 flex-col items-center justify-center rounded-lg bg-white/90 p-8 text-center shadow-2xl transition duration-300 ease-in-out dark:bg-slate-900/90">
+      {isConfirm ? <Confirm resolve={restart} reject={() => setConfirm(false)} /> : ""}
       {index === data.length ? <Result trophy={score} restart={restart} /> : ""}
       <Link to="/yamemorize/option/score">
         <div className="absolute top-2 left-2 cursor-pointer text-2xl text-blue-200 transition-all hover:text-blue-50">
@@ -130,7 +146,7 @@ const Meaning = () => {
         </div>
       </Link>
       <div
-        onClick={restart}
+        onClick={handleReset}
         className="absolute top-2 right-2 cursor-pointer text-2xl text-blue-200 transition-all hover:text-blue-50"
       >
         <ion-icon name="reload-circle"></ion-icon>
@@ -158,20 +174,31 @@ const Meaning = () => {
           {data[index]?.word}
         </div>
         <div className="w-full">
-          {randomAnswers.map((randomAnswer, index) => {
-            return (
-              <div
-                ref={(element) => {
-                  answers.current[index] = element
-                }}
-                key={randomAnswers[index]}
-                onClick={handleClick}
-                className="before-select mt-2 flex w-full cursor-pointer items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-left text-xl font-bold text-gray-400 transition-all"
-              >
-                {randomAnswer}
-              </div>
-            )
-          })}
+          {randomAnswers.length
+            ? randomAnswers.map((randomAnswer, index) => {
+                return (
+                  <div
+                    ref={(element) => {
+                      answers.current[index] = element
+                    }}
+                    key={randomAnswers[index]}
+                    onClick={handleClick}
+                    className="before-select mt-2 flex w-full cursor-pointer items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-left text-xl font-bold text-gray-400 transition-all"
+                  >
+                    {randomAnswer}
+                  </div>
+                )
+              })
+            : ["a", "b", "c", "d"].slice(0, Math.min(4, data?.length)).map((randomAnswer) => {
+                return (
+                  <div
+                    key={randomAnswer}
+                    className="before-select mt-2 flex w-full cursor-pointer items-center rounded-lg border-2 border-gray-300 px-4 py-2 text-left text-xl font-bold text-gray-400 transition-all"
+                  >
+                    {randomAnswer}
+                  </div>
+                )
+              })}
         </div>
       </div>
       <button

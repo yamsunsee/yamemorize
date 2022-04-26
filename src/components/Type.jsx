@@ -2,12 +2,14 @@ import { useRef, useState, useEffect, useContext } from "react"
 import { Context, updateData, updateState } from "../store"
 import { Link } from "react-router-dom"
 import Result from "./Result"
+import Confirm from "./Confirm"
 
 const Type = () => {
   const [{ data, language, state }, dispatch] = useContext(Context)
   const [index, setIndex] = useState()
   const [score, setScore] = useState()
   const [checked, setChecked] = useState("unchecked")
+  const [isConfirm, setConfirm] = useState(false)
   const [isAudioPlay, setIsAudioPlay] = useState(false)
   const fare = useRef()
   const answer = useRef()
@@ -159,6 +161,7 @@ const Type = () => {
   const restart = () => {
     setIndex(0)
     setScore(0)
+    setConfirm(false)
     const shuffledData = [...data].sort(() => Math.random() - 0.5)
     dispatch(updateData(shuffledData))
     localStorage.setItem("y-data", JSON.stringify(shuffledData))
@@ -179,8 +182,13 @@ const Type = () => {
     dispatch(updateState("", "type", "answer"))
   }
 
+  const handleReset = () => {
+    setConfirm(true)
+  }
+
   return (
     <div className="shape-small relative flex w-1/2 flex-col items-center justify-center rounded-lg bg-white/90 p-8 text-center shadow-2xl transition duration-300 ease-in-out dark:bg-slate-900/90">
+      {isConfirm ? <Confirm resolve={restart} reject={() => setConfirm(false)} /> : ""}
       {index === data.length ? <Result trophy={score} restart={restart} /> : ""}
       <Link to="/yamemorize/option/score">
         <div className="absolute top-2 left-2 cursor-pointer text-2xl text-blue-200 transition-all hover:text-blue-50">
@@ -188,7 +196,7 @@ const Type = () => {
         </div>
       </Link>
       <div
-        onClick={restart}
+        onClick={handleReset}
         className="absolute top-2 right-2 cursor-pointer text-2xl text-blue-200 transition-all hover:text-blue-50"
       >
         <ion-icon name="reload-circle"></ion-icon>

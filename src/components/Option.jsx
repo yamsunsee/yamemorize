@@ -1,11 +1,14 @@
-import { useContext } from "react"
+import { useState, useContext } from "react"
 import { Context } from "../store"
-import { Route, Routes, NavLink, Link } from "react-router-dom"
+import { Route, Routes, NavLink, Link, useNavigate } from "react-router-dom"
 import Scan from "./Scan"
 import Score from "./Score"
+import Confirm from "./Confirm"
 
 const Option = () => {
+  const [isConfirm, setConfirm] = useState(false)
   const [{ language }, dispatch] = useContext(Context)
+  const navigate = useNavigate()
 
   const navLinkStyles = ({ isActive }) => {
     return (
@@ -16,11 +19,21 @@ const Option = () => {
 
   return (
     <div className="relative flex w-1/2 flex-col overflow-hidden rounded-lg bg-white/90 shadow-2xl transition duration-300 ease-in-out dark:bg-slate-900/90">
-      <Link to="/yamemorize">
-        <div className="absolute top-2 left-2 cursor-pointer text-2xl text-blue-300 transition-all hover:text-blue-400">
-          <ion-icon name="arrow-back-circle"></ion-icon>
-        </div>
-      </Link>
+      {isConfirm ? (
+        <Confirm
+          resolve={() => navigate("/yamemorize", { replace: true })}
+          reject={() => setConfirm(false)}
+          isReset={false}
+        />
+      ) : (
+        ""
+      )}
+      <div
+        onClick={() => setConfirm(true)}
+        className="absolute top-2 left-2 cursor-pointer text-2xl text-blue-300 transition-all hover:text-blue-400"
+      >
+        <ion-icon name="arrow-back-circle"></ion-icon>
+      </div>
       <div className="grid grid-cols-2 text-center">
         <NavLink to="scan" className={navLinkStyles}>
           {language === "english" ? "scan" : `học "nhồi"`}

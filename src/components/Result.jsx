@@ -6,9 +6,9 @@ const Result = ({ trophy, restart }) => {
   let [{ language }, dispatch] = useContext(Context)
 
   return (
-    <div className="shape-small absolute z-20 flex h-full w-full flex-col items-center justify-center bg-white p-8 dark:bg-slate-900 dark:text-blue-200">
+    <div className="shape-small absolute z-20 flex h-full w-full flex-col items-center justify-center bg-white p-8 text-center dark:bg-slate-900 dark:text-blue-200">
       <div className="z-0 flex w-full flex-col items-center justify-center rounded-lg bg-white/50 px-8 py-12 shadow-2xl dark:bg-slate-900/50">
-        <div className="text-9xl text-amber-400">
+        <div className="text-6xl text-amber-400">
           <ion-icon name="trophy"></ion-icon>
         </div>
         <div className="text-3xl font-bold uppercase text-amber-400">

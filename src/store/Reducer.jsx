@@ -1,6 +1,7 @@
-import { TOGGLE_LANGUAGE, UPDATE_DATA, UPDATE_LINK, UPDATE_STATE } from "./Constants"
+import { TOGGLE_LANGUAGE, TOGGLE_AUDIO, UPDATE_DATA, UPDATE_LINK, UPDATE_STATE } from "./Constants"
 
 export const initialState = {
+  audio: "autoplay",
   language: "english",
   data: [],
   state: {
@@ -36,6 +37,12 @@ export const reducer = (previousState, action) => {
       return {
         ...previousState,
         language: action.payload,
+      }
+
+    case TOGGLE_AUDIO:
+      return {
+        ...previousState,
+        audio: action.payload,
       }
 
     case UPDATE_DATA:

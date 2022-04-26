@@ -1,4 +1,5 @@
 export const TOGGLE_LANGUAGE = "english/vietnamese"
+export const TOGGLE_AUDIO = "autoplay/muted"
 export const UPDATE_DATA = "data"
 export const UPDATE_STATE = "state"
 export const UPDATE_LINK = "link"
