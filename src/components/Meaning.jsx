@@ -52,7 +52,7 @@ const Meaning = () => {
   const handleClick = (event) => {
     if (event.target.classList.contains("before-select")) {
       dispatch(updateState(answers.current.indexOf(event.target), "meaning", "select"))
-      word.current.innerText += ` ${data[index].classes} ${data[index].ipa}`
+      word.current.innerText += ` ${data[index].classes || ""} ${data[index].ipa || ""}`
       answers.current.map((answer) => {
         answer.classList.remove("before-select", "cursor-pointer")
         answer.classList.add("unselected")

@@ -58,7 +58,7 @@ const Word = () => {
       if (event.target.innerText === data[index].word) {
         event.target.classList.remove("unselected")
         event.target.classList.add("correct")
-        event.target.innerText += ` ${data[index].classes} ${data[index].ipa}`
+        event.target.innerText += ` ${data[index].classes || ""} ${data[index].ipa || ""}`
 
         const newScore = state.word.select !== -1 ? score : score + 3
         dispatch(updateState(newScore, "word", "score"))
@@ -68,7 +68,7 @@ const Word = () => {
         const correctAnswer = answers.current.find((answer) => answer.innerText === data[index].word)
         correctAnswer.classList.remove("unselected")
         correctAnswer.classList.add("correct")
-        correctAnswer.innerText += ` ${data[index].classes} ${data[index].ipa}`
+        correctAnswer.innerText += ` ${data[index].classes || ""} ${data[index].ipa || ""}`
 
         const newScore = state.word.select !== -1 ? score : score <= 1 ? 0 : score - 1
         dispatch(updateState(newScore, "word", "score"))

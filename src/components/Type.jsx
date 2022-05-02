@@ -89,10 +89,10 @@ const Type = () => {
         "cursor-pointer"
       )
       event.target.classList.add("bg-blue-400", "dark:bg-blue-600")
-      const answerValue = answer.current.value.trim()
+      const answerValue = answer.current.value.trim().toLowerCase()
       dispatch(updateState(answerValue, "type", "answer"))
       dispatch(updateState(true, "type", "checked"))
-      if (answerValue === data[index].word) {
+      if (answerValue === data[index].word.toLowerCase()) {
         setChecked("correct")
         answer.current.classList.add("correct")
 
