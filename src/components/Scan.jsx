@@ -12,7 +12,7 @@ const Scan = () => {
 
   useEffect(() => {
     setContinue(state.deck.index !== 0)
-  }, [state.deck.index])
+  }, [state])
 
   return (
     <div className="bg-blue-100/90 p-8 transition duration-300 ease-in-out dark:bg-slate-800/90">
