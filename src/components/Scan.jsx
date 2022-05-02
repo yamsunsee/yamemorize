@@ -11,7 +11,7 @@ const Scan = () => {
   }, [])
 
   useEffect(() => {
-    setContinue(state.deck.index !== 0)
+    setContinue(state?.deck?.index !== 0)
   }, [state])
 
   return (
