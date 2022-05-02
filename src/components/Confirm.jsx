@@ -7,10 +7,10 @@ const Confirm = ({ resolve, reject, isReset = true, isShuffle = false }) => {
   return (
     <div className="shape-small absolute z-20 flex h-full w-full flex-col items-center justify-center bg-white p-8 text-center dark:bg-slate-900 dark:text-blue-200">
       <div className="z-0 flex w-full flex-col items-center justify-center rounded-lg bg-white/50 px-8 py-12 shadow-2xl dark:bg-slate-900/50">
-        <div className="text-6xl text-blue-400">
-          <ion-icon name="alert-circle"></ion-icon>
+        <div className="text-6xl text-amber-400">
+          <ion-icon name="warning"></ion-icon>
         </div>
-        <div className="text-3xl font-bold uppercase text-blue-400">
+        <div className="text-3xl font-bold text-amber-400">
           {isShuffle
             ? language === "english"
               ? `Your flashcards will be shuffled again!`
