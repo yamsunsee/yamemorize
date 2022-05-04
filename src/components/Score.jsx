@@ -16,17 +16,17 @@ const Score = () => {
   }, [state, option])
 
   return (
-    <div className="bg-blue-100/90 p-8 transition duration-300 ease-in-out dark:bg-slate-800/90">
-      <div className="grid grid-cols-2 overflow-hidden rounded-lg shadow-2xl">
-        <div className="min-h-[25rem] w-full">
+    <div className="h-full bg-blue-100/90 p-8 transition duration-300 ease-in-out dark:bg-slate-800/90">
+      <div className="grid h-full grid-cols-2 overflow-hidden rounded-lg shadow-2xl">
+        <div className="w-full">
           <div className="banner"></div>
         </div>
         <div className="flex flex-col items-center justify-center bg-white/50 p-4 shadow-2xl dark:bg-slate-900/50">
-          <div className="text-center text-2xl italic text-blue-400">
+          <div className="text-center text-2xl italic text-blue-400 2xl:text-4xl">
             {language === "english" ? "Let's check your result!" : "Cùng kiểm tra kết quả học tập nào!"}
           </div>
           <div className="my-4 flex flex-col">
-            <div className="flex items-center text-sm text-gray-400 dark:text-blue-200">
+            <div className="flex items-center text-sm text-gray-400 dark:text-blue-200 2xl:text-xl">
               <input
                 onChange={() => setOption("word")}
                 type="radio"
@@ -38,7 +38,7 @@ const Score = () => {
                 {language === "english" ? "Choose the correct word" : "Chọn từ vựng đúng"}
               </label>
             </div>
-            <div className="mt-2 flex items-center text-sm text-gray-400 dark:text-blue-200">
+            <div className="mt-2 flex items-center text-sm text-gray-400 dark:text-blue-200 2xl:text-xl">
               <input
                 onChange={() => setOption("meaning")}
                 type="radio"
@@ -50,7 +50,7 @@ const Score = () => {
                 {language === "english" ? "Choose the correct meaning" : "Chọn nghĩa đúng"}
               </label>
             </div>
-            <div className="mt-2 flex items-center text-sm text-gray-400 dark:text-blue-200">
+            <div className="mt-2 flex items-center text-sm text-gray-400 dark:text-blue-200 2xl:text-xl">
               <input
                 onChange={() => setOption("type")}
                 type="radio"
@@ -64,7 +64,7 @@ const Score = () => {
             </div>
           </div>
           <Link to={`/yamemorize/${option}`}>
-            <button className="w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700">
+            <button className="w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700 2xl:py-6 2xl:text-4xl">
               {isContinue
                 ? language === "english"
                   ? "Continue"

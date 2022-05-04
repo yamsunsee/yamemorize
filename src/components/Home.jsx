@@ -95,22 +95,22 @@ const Home = () => {
   }
 
   return (
-    <div className="shape-small grid-home w-3/4 gap-8 rounded-lg bg-white/90 p-8 shadow-2xl transition duration-300 ease-in-out dark:bg-slate-900/90">
-      <div className="min-h-96 z-10 w-full overflow-hidden rounded-lg  shadow-2xl">
+    <div className="shape-small grid-home h-fit max-h-[54rem] w-3/4 max-w-6xl gap-8 rounded-lg bg-white/90 p-8 shadow-2xl transition duration-300 ease-in-out dark:bg-slate-900/90 2xl:h-full">
+      <div className="z-10 w-full overflow-hidden rounded-lg shadow-2xl">
         <div className="hero"></div>
       </div>
       <div className="z-10 flex flex-col items-center justify-center rounded-lg bg-white/90 p-8 text-center shadow-2xl dark:bg-slate-900/90">
-        <h1 className="text-5xl font-bold capitalize text-blue-400">
+        <h1 className="text-5xl font-bold capitalize text-blue-400 2xl:text-7xl">
           {language === "english" ? "Learning vocabs in a softer way!" : "Học từ vựng bằng một cách đơn giản hơn!"}
         </h1>
-        <p className="mt-2 text-sm text-gray-400">
+        <p className="mt-2 text-sm text-gray-400 2xl:text-xl">
           {language === "english"
             ? "This website will generate more attractive flashcards from your datasheet! Hope you enjoy it!"
             : "Website này sẽ giúp các thẻ từ vựng được tạo ra từ dữ liệu của bạn trở nên thu hút hơn! Hi vọng bạn sẽ thích chúng!"}
         </p>
         <button
           onClick={latestLink}
-          className="mt-4 w-full cursor-pointer rounded-lg bg-blue-400 p-4 text-sm font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700"
+          className="mt-4 w-full cursor-pointer rounded-lg bg-blue-400 p-4 text-sm font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700 2xl:p-6 2xl:text-xl"
         >
           {language === "english"
             ? link
@@ -124,7 +124,7 @@ const Home = () => {
           onChange={checkInput}
           onKeyDown={handleKeydown}
           ref={input}
-          className="mt-4 w-full rounded-lg border-2 border-blue-300 p-4 text-gray-400 focus:outline-none focus:ring-2 dark:bg-slate-800 dark:text-blue-200"
+          className="mt-4 w-full rounded-lg border-2 border-blue-300 p-4 text-gray-400 focus:outline-none focus:ring-2 dark:bg-slate-800 dark:text-blue-200 2xl:p-6 2xl:text-xl"
           type="text"
           placeholder={
             language === "english"
@@ -132,18 +132,18 @@ const Home = () => {
               : "Nhập đường dẫn đến dữ liệu của bạn tại đây..."
           }
         />
-        <p ref={message} className="mt-2 hidden self-start text-sm font-bold italic text-red-500">
+        <p ref={message} className="mt-2 hidden self-start text-sm font-bold italic text-red-500 2xl:text-xl">
           {language === "english"
             ? "Failed to generate flashcards from your datasheet!"
             : "Không thể tạo các thẻ từ vựng từ dữ liệu của bạn!"}
         </p>
         <button
           onClick={fetchData}
-          className="mt-4 w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700"
+          className="mt-4 w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700 2xl:py-6 2xl:text-4xl"
         >
           {language === "english" ? "Begin session" : "Bắt đầu"}
         </button>
-        <div className="flex w-full justify-evenly">
+        <div className="flex w-full justify-evenly 2xl:text-xl">
           <a className="mt-4 text-blue-500 underline" href={DEFAULT_DATASHEET_LINK} target="_blank">
             {language === "english" ? "Sample datasheet" : "Dữ liệu mẫu"}
           </a>

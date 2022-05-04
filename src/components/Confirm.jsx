@@ -6,11 +6,11 @@ const Confirm = ({ resolve, reject, isReset = true, isShuffle = false }) => {
 
   return (
     <div className="shape-small absolute z-20 flex h-full w-full flex-col items-center justify-center bg-white p-8 text-center dark:bg-slate-900 dark:text-blue-200">
-      <div className="z-0 flex w-full flex-col items-center justify-center rounded-lg bg-white/50 px-8 py-12 shadow-2xl dark:bg-slate-900/50">
-        <div className="text-6xl text-amber-400">
+      <div className="z-0 flex h-full w-full flex-col items-center justify-center rounded-lg bg-white/50 px-8 py-12 shadow-2xl dark:bg-slate-900/50">
+        <div className="text-7xl text-amber-400 2xl:text-9xl">
           <ion-icon name="warning"></ion-icon>
         </div>
-        <div className="text-3xl font-bold text-amber-400">
+        <div className="text-3xl font-bold text-amber-400 2xl:text-5xl">
           {isShuffle
             ? language === "english"
               ? `Your flashcards will be shuffled again!`
@@ -26,7 +26,7 @@ const Confirm = ({ resolve, reject, isReset = true, isShuffle = false }) => {
         <div>
           <button
             onClick={reject}
-            className="mt-8 w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700"
+            className="mt-8 w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700 2xl:py-6 2xl:text-4xl"
           >
             {isReset
               ? language === "english"
@@ -38,7 +38,7 @@ const Confirm = ({ resolve, reject, isReset = true, isShuffle = false }) => {
           </button>
           <button
             onClick={resolve}
-            className="mt-4 w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700"
+            className="mt-4 w-full cursor-pointer rounded-lg bg-blue-400 px-8 py-4 text-2xl font-bold uppercase text-white transition-all hover:bg-blue-500 dark:bg-blue-600 dark:text-blue-200 dark:hover:bg-blue-700 2xl:py-6 2xl:text-4xl"
           >
             {isShuffle
               ? language === "english"
